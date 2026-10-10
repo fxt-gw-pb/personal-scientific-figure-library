@@ -1,0 +1,56 @@
+schema_version: 1
+id: forest-ci
+title: 比值及区间森林图 · 合成工作流示例
+kind: example
+status: reusable
+family: forest
+created: '2026-10-10'
+tags:
+- ratio
+- log-axis
+- interval
+- aligned-table
+- teal-terracotta
+why_saved: 可复用的标签—对数比值区间—数值三列对齐，分组颜色按语义绑定。
+source:
+  kind: example
+  citation: null
+  url: null
+  doi: null
+  figure_label: null
+  files:
+  - path: reference/source.png
+    sha256: 6765d862078a666ae6b24c3eb03075dbfb9e6fc849d4781c4dd1dd582a0f4a54
+    role: image
+  - path: reference/ORIGIN.md
+    sha256: 5d3115ff691328deee0a87c42fbc72774e3e9b22c61d485156c72583834573b8
+    role: other
+data:
+  kind: synthetic
+  path: data/example.csv
+  contract: data/contract.yaml
+  notes: 人为构造的正比值与区间端点；未拟合统计模型、计算 p 值或声明置信覆盖率。
+implementation:
+  language: python
+  entrypoint: code/plot.py
+  requirements: code/requirements.txt
+  style: style.yaml
+assets:
+  reference: reference/source.png
+  preview: outputs/figure.png
+  thumbnail: outputs/thumb.png
+  vector: outputs/figure.svg
+  comparison: outputs/comparison.png
+reuse:
+  scope:
+  - positive ratio estimates with supplied intervals
+  - semantic group colors and aligned value column
+  caveats:
+  - All values are synthetic and do not support scientific conclusions.
+  - The frozen reference is from the same implementation, not an independent paper
+    recreation.
+  - Very small ratios need an increased axes.value_decimals value.
+  - Longer labels or denser rows may require a larger fixed canvas.
+publication:
+  include_in_public_catalog: false
+  rights_note: null

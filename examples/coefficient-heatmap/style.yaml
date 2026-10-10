@@ -1,0 +1,81 @@
+schema_version: 1
+figure:
+  width_mm: 232
+  height_mm: 150
+  dpi: 220
+  background: '#FFFFFF'
+palette:
+  negative: '#3D729A'
+  neutral: '#F5F6F4'
+  positive: '#B85D51'
+  text: '#27383D'
+  muted_text: '#647176'
+  annotation_light: '#FFFFFF'
+  cell_border: '#FFFFFF'
+  focal_outline: '#526C72'
+  row_band: '#F5F7F7'
+  grid: '#E1E7E8'
+  reference: '#8A979B'
+  zero_point: '#69767B'
+typography:
+  family: DejaVu Sans
+  base_size_pt: 8.6
+  panel_title_size_pt: 10.2
+  panel_title_weight: semibold
+  label_size_pt: 8.6
+  tick_size_pt: 8.2
+  annotation_size_pt: 8.2
+  axis_label_size_pt: 8.6
+  colorbar_size_pt: 8.0
+  note_size_pt: 7.5
+  focal_label_weight: semibold
+  line_spacing: 1.1
+layout:
+  left: 0.255
+  right: 0.965
+  top: 0.865
+  bottom: 0.275
+  panel_ratios: [1.8, 1.0]
+  panel_gap: 0.22
+  feature_wrap_chars: 29
+  outcome_wrap_chars: 13
+  header_gap: 0.060
+  colorbar_rect: [0.315, 0.135, 0.27, 0.022]
+  note_x: 0.045
+  note_y: 0.025
+marks:
+  focal_outcome: Function
+  color_limit: null
+  color_limit_step: 0.1
+  cell_border_width_pt: 1.0
+  outline_focal: true
+  focal_outline_width_pt: 0.9
+  annotate_cells: true
+  annotation_format: '.2f'
+  light_text_threshold: 0.49
+  striped_interval_rows: true
+  marker: o
+  marker_size_pt: 5.0
+  marker_edge_width_pt: 0.5
+  interval_width_pt: 1.25
+  cap_size_pt: 2.3
+  reference_width_pt: 0.85
+  reference_line_style: '--'
+axes:
+  heatmap_title: (a) Coefficient pattern
+  interval_title_template: '(b) {outcome}: intervals'
+  interval_x_label: Standardized coefficient
+  note: Synthetic demonstration · illustrative estimates and intervals
+  heatmap_tick_pad_pt: 7
+  interval_tick_pad_pt: 7
+  interval_label_pad_pt: 10
+  interval_padding_fraction: 0.16
+  minimum_interval_extent: 0.15
+  interval_tick_count: 4
+  grid_width_pt: 0.65
+legend:
+  show_colorbar: true
+  label: Standardized coefficient
+  tick_count: 5
+  tick_pad_pt: 4
+  label_pad_pt: 6

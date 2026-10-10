@@ -1,0 +1,316 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "One collected scientific figure or an explicitly separated demonstration.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{2,63}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "enum": [
+        "collected",
+        "example"
+      ]
+    },
+    "status": {
+      "enum": [
+        "captured",
+        "draft",
+        "reproduced",
+        "reusable"
+      ]
+    },
+    "family": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created": {
+      "type": "string",
+      "format": "date"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "why_saved": {
+      "type": "string"
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "unknown",
+            "self",
+            "paper",
+            "web",
+            "example"
+          ]
+        },
+        "citation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "doi": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "figure_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "role": {
+                "enum": [
+                  "image",
+                  "code",
+                  "data",
+                  "caption",
+                  "other"
+                ]
+              }
+            },
+            "required": [
+              "path",
+              "sha256",
+              "role"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "citation",
+        "url",
+        "doi",
+        "figure_label",
+        "files"
+      ],
+      "additionalProperties": false
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "unknown",
+            "original",
+            "digitized",
+            "synthetic"
+          ]
+        },
+        "path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "contract": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "path",
+        "contract",
+        "notes"
+      ],
+      "additionalProperties": false
+    },
+    "implementation": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "enum": [
+            "python",
+            "r",
+            "other",
+            null
+          ]
+        },
+        "entrypoint": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "requirements": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "style": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      },
+      "required": [
+        "language",
+        "entrypoint",
+        "requirements",
+        "style"
+      ],
+      "additionalProperties": false
+    },
+    "assets": {
+      "type": "object",
+      "properties": {
+        "reference": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "preview": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "thumbnail": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "vector": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "comparison": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      },
+      "required": [
+        "reference",
+        "preview",
+        "thumbnail",
+        "vector",
+        "comparison"
+      ],
+      "additionalProperties": false
+    },
+    "reuse": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "caveats": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "scope",
+        "caveats"
+      ],
+      "additionalProperties": false
+    },
+    "publication": {
+      "type": "object",
+      "properties": {
+        "include_in_public_catalog": {
+          "type": "boolean"
+        },
+        "rights_note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "include_in_public_catalog",
+        "rights_note"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "kind",
+    "status",
+    "family",
+    "created",
+    "tags",
+    "why_saved",
+    "source",
+    "data",
+    "implementation",
+    "assets",
+    "reuse",
+    "publication"
+  ],
+  "additionalProperties": false
+}

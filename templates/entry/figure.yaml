@@ -1,0 +1,38 @@
+schema_version: 1
+id: replace-me
+title: 待填写图名
+kind: collected
+status: captured
+family: unclassified
+created: '2026-10-10'
+tags: []
+why_saved: ''
+source:
+  kind: unknown
+  citation: null
+  url: null
+  doi: null
+  figure_label: null
+  files: []
+data:
+  kind: unknown
+  path: data/example.csv
+  contract: data/contract.yaml
+  notes: 尚未确认原始数值。示例表头只是脚手架，不是论文数据。
+implementation:
+  language: python
+  entrypoint: code/plot.py
+  requirements: code/requirements.txt
+  style: style.yaml
+assets:
+  reference: null
+  preview: outputs/figure.png
+  thumbnail: outputs/thumb.png
+  vector: outputs/figure.svg
+  comparison: null
+reuse:
+  scope: []
+  caveats: []
+publication:
+  include_in_public_catalog: false
+  rights_note: null

@@ -1,0 +1,2 @@
+# Implement the plot, then list and pin only the packages actually exercised.
+# This scaffold intentionally has no plotting implementation or dependencies.

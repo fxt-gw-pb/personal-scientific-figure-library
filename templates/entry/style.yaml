@@ -1,0 +1,19 @@
+# 这里仅放绘图代码实际读取的参数；原图观察和未确定项放在 review.yaml。
+schema_version: 1
+figure:
+  width_mm: 180
+  height_mm: 120
+  dpi: 180
+  background: '#FFFFFF'
+palette:
+  primary: '#386B9D'
+  secondary: '#BB5A45'
+  text: '#252525'
+  grid: '#E5E5E5'
+typography:
+  family: DejaVu Sans
+  base_size_pt: 10
+layout: {}
+marks: {}
+axes: {}
+legend: {}

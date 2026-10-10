@@ -1,0 +1,61 @@
+schema_version: 1
+id: coefficient-heatmap
+title: 系数热图与同源区间图 · 合成工作流示例
+kind: example
+status: reusable
+family: heatmap
+created: '2026-10-10'
+tags:
+- coefficient
+- diverging-palette
+- interval
+- multi-panel
+- shared-data
+why_saved: 用单一长表同时驱动热图和选定结局的区间面板，保持行序与数值对应。
+source:
+  kind: example
+  citation: null
+  url: null
+  doi: null
+  figure_label: null
+  files:
+  - path: reference/source.png
+    sha256: 8637870cc83de87571cd1bc1fc2b051f03d136eabcb48b3b0e18007143fcd685
+    role: image
+  - path: reference/ORIGIN.md
+    sha256: f2e3f4ce82ded00ca6e2ffa2e5ef96491fa1c4cd305a3a0909fd27ad3846b8af
+    role: other
+  - path: reference/plot-at-capture.py
+    sha256: 0c5494af174081bd01f426a7e90725adc418879128a3fed198a4905bc924bc4a
+    role: code
+data:
+  kind: synthetic
+  path: data/example.csv
+  contract: data/contract.yaml
+  notes: 8×4 合成系数长表；区间端点由确定性人工规则构造，未拟合模型或声明置信覆盖率。
+implementation:
+  language: python
+  entrypoint: code/plot.py
+  requirements: code/requirements.txt
+  style: style.yaml
+assets:
+  reference: reference/source.png
+  preview: outputs/figure.png
+  thumbnail: outputs/thumb.png
+  vector: outputs/figure.svg
+  comparison: outputs/comparison.png
+reuse:
+  scope:
+  - complete matrices of comparable signed coefficients
+  - paired heatmap and focal-outcome interval panel
+  caveats:
+  - All coefficients and intervals are synthetic; no model fitting or inferential
+    claims.
+  - The frozen reference is from the same implementation, not an independent paper
+    recreation.
+  - Use a common explicit color_limit when comparing multiple heatmaps.
+  - Small coefficients need appropriate annotation_format and scale settings.
+  - Dense or long labels may require an enlarged fixed canvas.
+publication:
+  include_in_public_catalog: false
+  rights_note: null

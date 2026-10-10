@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Human/agent review of one exact run; true flags never set by the CLI.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "reviewed_run": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "visual_checked": {
+      "type": "boolean"
+    },
+    "data_checked": {
+      "type": "boolean"
+    },
+    "reuse_checked": {
+      "type": "boolean"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "known_differences": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "minLength": 1
+              },
+              "summary": {
+                "type": "string",
+                "minLength": 1
+              },
+              "run": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "minLength": 1
+              }
+            },
+            "required": [
+              "kind",
+              "summary"
+            ],
+            "additionalProperties": true
+          }
+        ]
+      }
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "aspect": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": {
+            "type": "string",
+            "minLength": 1
+          },
+          "certainty": {
+            "enum": [
+              "verified",
+              "inferred",
+              "choice",
+              "unknown"
+            ]
+          }
+        },
+        "required": [
+          "aspect",
+          "evidence",
+          "certainty"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "reviewer": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "reviewed_run",
+    "visual_checked",
+    "data_checked",
+    "reuse_checked",
+    "summary",
+    "known_differences",
+    "checks",
+    "provenance",
+    "reviewer"
+  ],
+  "additionalProperties": false
+}

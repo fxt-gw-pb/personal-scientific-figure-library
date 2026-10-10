@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "entry_id": "coefficient-heatmap",
+  "run_id": "92efe4eaef2d4069b570d3bb57a083b4",
+  "created_utc": "2026-10-10T08:56:31+00:00",
+  "success": true,
+  "output_mode": "variant",
+  "argv": [
+    "python",
+    "code/plot.py",
+    "--data",
+    "external/alternative.csv",
+    "--style",
+    "style.yaml",
+    "--out",
+    "variant-output"
+  ],
+  "argv_note": "Paths are normalized for portability. Execution uses an entry-relative working directory, the current interpreter, and a temporary output directory that is committed only after validation. External inputs are recorded by basename and hash.",
+  "inputs": [
+    {
+      "path": "data/contract.yaml",
+      "role": "contract",
+      "sha256": "5cca3a70d3a2bb976bc7e24edd8e1eef29e86d95ecc37401aa4c1e11e6de9360"
+    },
+    {
+      "path": "external/alternative.csv",
+      "role": "data",
+      "sha256": "56140468b04a238a5dbe1c3dfe883dfe6b672a37f6c4fe834b1336f877f1d92a"
+    },
+    {
+      "path": "data/alternative.csv",
+      "role": "data-support",
+      "sha256": "56140468b04a238a5dbe1c3dfe883dfe6b672a37f6c4fe834b1336f877f1d92a"
+    },
+    {
+      "path": "code/plot.py",
+      "role": "entrypoint",
+      "sha256": "35e3ab9c77f57a0681a1ce925a8be397dc228f7c92fc89e9121f011b922ff0f6"
+    },
+    {
+      "path": "reference/source.png",
+      "role": "reference",
+      "sha256": "8637870cc83de87571cd1bc1fc2b051f03d136eabcb48b3b0e18007143fcd685"
+    },
+    {
+      "path": "code/requirements.txt",
+      "role": "requirements",
+      "sha256": "a4c0aa9064564ec65ea8a3860e3d490695eaa1360f130e46539675dc0bc6c58e"
+    },
+    {
+      "path": "reference/ORIGIN.md",
+      "role": "source-material",
+      "sha256": "f2e3f4ce82ded00ca6e2ffa2e5ef96491fa1c4cd305a3a0909fd27ad3846b8af"
+    },
+    {
+      "path": "reference/plot-at-capture.py",
+      "role": "source-material",
+      "sha256": "0c5494af174081bd01f426a7e90725adc418879128a3fed198a4905bc924bc4a"
+    },
+    {
+      "path": "style.yaml",
+      "role": "style",
+      "sha256": "32f5a22d70dcbf32b34e86d14111b3b6bf675c81042604c5500c10ac4ca70524"
+    }
+  ],
+  "input_sha256": "88492476657b459aafd5a0f2261c1ea9e212d3fafb2cdcc304030ee08443bca7",
+  "metadata_basis": {
+    "source": {
+      "kind": "example",
+      "citation": null,
+      "url": null,
+      "doi": null,
+      "figure_label": null,
+      "files": [
+        {
+          "path": "reference/source.png",
+          "sha256": "8637870cc83de87571cd1bc1fc2b051f03d136eabcb48b3b0e18007143fcd685",
+          "role": "image"
+        },
+        {
+          "path": "reference/ORIGIN.md",
+          "sha256": "f2e3f4ce82ded00ca6e2ffa2e5ef96491fa1c4cd305a3a0909fd27ad3846b8af",
+          "role": "other"
+        },
+        {
+          "path": "reference/plot-at-capture.py",
+          "sha256": "0c5494af174081bd01f426a7e90725adc418879128a3fed198a4905bc924bc4a",
+          "role": "code"
+        }
+      ]
+    },
+    "data": {
+      "kind": "synthetic",
+      "path": "data/example.csv",
+      "contract": "data/contract.yaml",
+      "notes": "8×4 合成系数长表；区间端点由确定性人工规则构造，未拟合模型或声明置信覆盖率。"
+    },
+    "implementation": {
+      "language": "python",
+      "entrypoint": "code/plot.py",
+      "requirements": "code/requirements.txt",
+      "style": "style.yaml"
+    },
+    "reference": "reference/source.png"
+  },
+  "basis_sha256": "a894a05dfa87a15fac0ab03a8876d9e7c0e5456fa8817f378f0ea7b491fa9f15",
+  "recipe_sha256": "df8dd4fa8cf21b5f628f1cc1847b36d8e8b289e904f604616256bd06ade209c6",
+  "data_sha256": "56140468b04a238a5dbe1c3dfe883dfe6b672a37f6c4fe834b1336f877f1d92a",
+  "outputs": {
+    "figure.pdf": "de1296c0a16dd11de499dccb14d36671fdfd7551a0b0944628b51d8ece53fb9d",
+    "figure.png": "f89ee7fd91a44b8aa99886e35cf366725f9fb53715bf9b1ccada56d6b1a0ce75",
+    "figure.svg": "f8d3e50fb4d2e14ab71dc7ca40b7cbf60a41807765c0f501af34d05dda8791aa",
+    "thumb.png": "259153b0f9a23813a33981a5bf2726b3cc57e5ad5e7cedd89dc6cf945437c199"
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "packages": {
+      "jsonschema": "4.26.0",
+      "matplotlib": "3.10.8",
+      "numpy": "2.3.5",
+      "Pillow": "12.3.0",
+      "PyYAML": "6.0.3"
+    }
+  },
+  "declared_seed": null
+}

@@ -1,0 +1,38 @@
+schema_version: 1
+reviewed_run: 3d60fc91a2593da79c825928abdb2dbaa95acbe1505e6a4e86fb1949d357fcb7
+visual_checked: true
+data_checked: true
+reuse_checked: true
+summary: 已实际查看原图/复现对照、PNG、修正后的 PDF 栅格化结果及换数据 PNG；核对热图与区间面板共用数据和行序。可在输入约定内独立复用；同源合成参考不证明陌生论文复现精度。
+known_differences:
+- 参考 PNG 为首次实现生成的同源合成图，并非来自外部论文。
+- 当前实现为不透明色条增加相邻矢量面的同色边线，以消除部分 PDF/SVG 阅读器的细白缝；原始参考图没有覆盖，首次源码保存在 reference/plot-at-capture.py。
+checks:
+- kind: visual
+  summary: 检查两面板对齐、特征与结局标签、格内数值和以零为中心的连续色条。已修复矢量 PDF 色条白缝并重新栅格化目视检查；SVG 文字、热图和色条保持矢量。
+- kind: data
+  summary: 主输入为 8 个特征 × 4 个结局的完整长表。右侧 Function 面板的估计、区间、行序来自与左侧相同的数据；符号与颜色对应。系数与区间为人工合成，不计算
+    p 值、不声称置信覆盖率。
+- kind: changed-input
+  summary: 使用 data/alternative.csv 将 8×4 改为 10×5，增加长标签与新结局，替换系数并改变行列顺序。实际运行且查看输出，热图完整、标签可读，Function
+    区间面板继续与热图行序和数据对应；绘图实现/样式不变，CSV 摘要不同。 预览另存 review/evidence/changed-input.png，其字节摘要与证据清单中的
+    figure.png 一致。
+  run: review/evidence/changed-input-run.json
+provenance:
+- aspect: reference-origin
+  evidence: reference/ORIGIN.md 记录本实现、合成 CSV 与 style.yaml 生成并冻结 source.png 的命令及摘要；没有外部论文来源。
+  certainty: verified
+- aspect: palette
+  evidence: '负系数 → #3D729A，零 → #F5F6F4，正系数 → #B85D51；连续色标以零为中心，区间点按符号绑定颜色。 这些颜色是本示例的设计选择，不是从外部图推定。'
+  certainty: choice
+- aspect: font
+  evidence: typography.family = DejaVu Sans；渲染前 findfont(..., fallback_to_default=False)
+    验证可用。字体及各字号均为实现选择。
+  certainty: choice
+- aspect: layout
+  evidence: 232 × 150 mm；热图和区间图两面板，共用特征行序；面板比、边距及色条位置均来自 style.yaml。 该布局为实现选择。
+  certainty: choice
+- aspect: data
+  evidence: 8×4 合成系数长表；区间端点由确定性人工规则构造，未拟合模型或声明置信覆盖率。 data/contract.yaml 与脚本验证输入约束。
+  certainty: verified
+reviewer: ChatGPT agent：2026-10-10 实际渲染、查看图片与 PDF 栅格化结果，结合代码和数据契约核对

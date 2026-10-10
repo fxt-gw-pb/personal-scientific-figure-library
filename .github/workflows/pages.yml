@@ -1,0 +1,52 @@
+name: Deploy website
+
+# Builds the public website from figure.yaml entries and deploys it to GitHub Pages.
+# Only accepted, explicitly opted-in collected entries (plus labelled examples, per
+# site/site.config.json) are exported. The repository itself is not published as the site.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Install core dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Validate entries before publishing
+        run: python scripts/figurelib.py validate --include-examples
+      - name: Build public website
+        run: python scripts/figurelib.py site --out _site
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

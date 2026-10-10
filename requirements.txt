@@ -1,0 +1,4 @@
+# Core only. Versions used for this delivery; not a claim about newest releases.
+PyYAML==6.0.3
+jsonschema==4.26.0
+Pillow==12.3.0

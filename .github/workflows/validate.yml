@@ -1,0 +1,44 @@
+name: Validate figure repository
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-examples.txt
+      - name: Install core and example dependencies
+        run: python -m pip install -r requirements-examples.txt
+      - name: Test behavior and input validation
+        run: python -m unittest discover -s tests -v
+      - name: Validate saved entries and their evidence
+        run: python scripts/figurelib.py validate --include-examples
+      - name: Render examples outside canonical entries
+        run: |
+          python scripts/figurelib.py render forest-ci --out workspace/ci-forest
+          python scripts/figurelib.py render coefficient-heatmap --out workspace/ci-heatmap
+      - name: Check generated collection catalog
+        run: |
+          python scripts/figurelib.py build
+          git diff --exit-code -- catalog/
+      - name: Build public and local website views
+        run: |
+          python scripts/figurelib.py site --out workspace/ci-site
+          python scripts/figurelib.py site --local --out workspace/ci-site-local

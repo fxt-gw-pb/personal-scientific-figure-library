@@ -1,0 +1,34 @@
+schema_version: 1
+format: csv
+description: One row per factor; ratio estimates and supplied interval endpoints on their original positive scale.
+example_kind: synthetic
+columns:
+  - name: label
+    type: string
+    required: true
+    description: Unique nonempty factor label; CSV row order is the display order.
+  - name: group
+    type: string
+    required: true
+    description: Nonempty semantic group; every group must map to a palette role in marks.group_roles.
+  - name: estimate
+    type: number
+    required: true
+    description: Finite strictly positive point estimate, not its logarithm.
+  - name: lower
+    type: number
+    required: true
+    description: Finite strictly positive lower interval endpoint.
+  - name: upper
+    type: number
+    required: true
+    description: Finite strictly positive upper interval endpoint.
+constraints:
+  - Column names must match the five listed columns exactly; their order may vary.
+  - Empty data, empty labels/groups, duplicate labels, extra fields, and missing fields are rejected.
+  - All numeric values must be finite and greater than zero.
+  - Each row must satisfy lower <= estimate <= upper.
+  - Rows retain their input order. Group colors are keyed by names, never by row position.
+  - The plot does not calculate estimates, confidence coverage, significance, or p-values.
+  - Real-data use requires a common meaningful ratio scale and an accurately named interval in axes.value_header/note.
+  - If labels no longer fit the fixed canvas, the renderer fails with an explicit style-adjustment message.

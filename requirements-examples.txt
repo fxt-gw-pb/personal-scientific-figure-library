@@ -1,0 +1,4 @@
+# Python 3.11+, recommended/tested Python 3.12.
+-r requirements.txt
+matplotlib==3.10.8
+numpy==2.3.5

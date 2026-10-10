@@ -1,0 +1,51 @@
+feature,outcome,estimate,lower,upper
+Environmental exposure across daily settings,Well-being,-0.370,-0.470,-0.260
+Environmental exposure across daily settings,Function,-0.220,-0.335,-0.090
+Environmental exposure across daily settings,Cognition,-0.290,-0.420,-0.140
+Environmental exposure across daily settings,Sleep,-0.190,-0.335,-0.070
+Environmental exposure across daily settings,Participation,-0.320,-0.480,-0.180
+Physical activity outside scheduled exercise,Well-being,0.480,0.350,0.600
+Physical activity outside scheduled exercise,Function,0.720,0.575,0.860
+Physical activity outside scheduled exercise,Cognition,0.350,0.190,0.460
+Physical activity outside scheduled exercise,Sleep,0.260,0.160,0.390
+Physical activity outside scheduled exercise,Participation,0.590,0.475,0.740
+Age at the repeated assessment visit,Well-being,-0.160,-0.320,-0.030
+Age at the repeated assessment visit,Function,-0.610,-0.710,-0.460
+Age at the repeated assessment visit,Cognition,-0.470,-0.585,-0.350
+Age at the repeated assessment visit,Sleep,-0.120,-0.250,0.020
+Age at the repeated assessment visit,Participation,-0.380,-0.525,-0.270
+Sleep regularity across the working week,Well-being,0.570,0.455,0.710
+Sleep regularity across the working week,Function,0.310,0.180,0.420
+Sleep regularity across the working week,Cognition,0.460,0.315,0.590
+Sleep regularity across the working week,Sleep,0.880,0.720,1.030
+Sleep regularity across the working week,Participation,0.420,0.320,0.540
+Average resting pulse across repeated visits,Well-being,-0.260,-0.405,-0.110
+Average resting pulse across repeated visits,Function,-0.430,-0.590,-0.310
+Average resting pulse across repeated visits,Cognition,-0.190,-0.290,-0.050
+Average resting pulse across repeated visits,Sleep,-0.150,-0.265,-0.040
+Average resting pulse across repeated visits,Participation,-0.230,-0.360,-0.100
+Indicators of perceived contextual stress,Well-being,-0.680,-0.780,-0.570
+Indicators of perceived contextual stress,Function,-0.490,-0.605,-0.360
+Indicators of perceived contextual stress,Cognition,-0.310,-0.440,-0.160
+Indicators of perceived contextual stress,Sleep,-0.410,-0.555,-0.290
+Indicators of perceived contextual stress,Participation,-0.560,-0.720,-0.420
+Baseline body size standardized within site,Well-being,-0.290,-0.420,-0.170
+Baseline body size standardized within site,Function,-0.520,-0.665,-0.380
+Baseline body size standardized within site,Cognition,0.140,-0.020,0.250
+Baseline body size standardized within site,Sleep,-0.230,-0.330,-0.100
+Baseline body size standardized within site,Participation,-0.180,-0.295,-0.030
+Dietary quality across repeated assessments,Well-being,0.340,0.180,0.470
+Dietary quality across repeated assessments,Function,0.380,0.280,0.530
+Dietary quality across repeated assessments,Cognition,0.270,0.155,0.390
+Dietary quality across repeated assessments,Sleep,0.160,0.030,0.300
+Dietary quality across repeated assessments,Participation,0.240,0.095,0.350
+Time available for restorative activities,Well-being,0.410,0.295,0.550
+Time available for restorative activities,Function,0.180,0.050,0.290
+Time available for restorative activities,Cognition,0.210,0.065,0.340
+Time available for restorative activities,Sleep,0.390,0.230,0.540
+Time available for restorative activities,Participation,0.520,0.420,0.640
+Access to supportive neighbourhood spaces,Well-being,0.280,0.135,0.430
+Access to supportive neighbourhood spaces,Function,0.360,0.200,0.480
+Access to supportive neighbourhood spaces,Cognition,0.230,0.130,0.370
+Access to supportive neighbourhood spaces,Sleep,0.130,0.015,0.240
+Access to supportive neighbourhood spaces,Participation,0.610,0.480,0.740

@@ -1,0 +1,38 @@
+schema_version: 1
+reviewed_run: 7ddb2311984b53fd8f06b111f64b1354f2a10483138dc46f6328568aec2c1b6f
+visual_checked: true
+data_checked: true
+reuse_checked: true
+summary: 已实际查看参考/复现并排图、PNG、PDF 栅格化结果和换数据 PNG；核对合成 CSV 的正比值、区间端点、组别配色与对数轴基准。可用于约定输入范围内的独立复用；该同源参考不证明陌生论文复现精度。
+known_differences:
+- 参考 PNG 由同一套示例实现和合成输入生成并冻结；视觉一致仅用于验证本仓库工作流，不属于外部图像还原准确率证据。
+checks:
+- kind: visual
+  summary: 检查标签—区间—数值三列的行对齐、标题与边距、对数刻度和基准线 1。PNG 与 PDF 中未见文字裁切或遮挡；SVG 保留文字和矢量图元。
+- kind: data
+  summary: 8 行主输入均为正比值，区间包含估计值；Habits 与 Context 的颜色按组名绑定。数据和区间都是明确标注的人工合成示例，没有统计模型、p
+    值或置信覆盖率声明。
+- kind: changed-input
+  summary: 使用 data/alternative.csv 将 8 行改为 10 行，替换数值、加长标签并改变组别顺序。实际运行且查看输出，换行、列对齐和组别颜色保持一致；run
+    记录为同一绘图实现/样式、不同 CSV 摘要。 预览另存 review/evidence/changed-input.png，其字节摘要与证据清单中的 figure.png
+    一致。
+  run: review/evidence/changed-input-run.json
+provenance:
+- aspect: reference-origin
+  evidence: reference/ORIGIN.md 记录本实现、合成 CSV 与 style.yaml 生成并冻结 source.png 的命令及摘要；没有外部论文来源。
+  certainty: verified
+- aspect: palette
+  evidence: 'Habits → palette.primary #277F7B；Context → palette.secondary #B56254；按组名映射而非行号。
+    这些颜色是本示例的设计选择，不是从外部图推定。'
+  certainty: choice
+- aspect: font
+  evidence: typography.family = DejaVu Sans；渲染前 findfont(..., fallback_to_default=False)
+    验证可用。字体及各字号均为实现选择。
+  certainty: choice
+- aspect: layout
+  evidence: 218 × 138 mm，三列相对宽度 0.38:0.38:0.24；尺寸和边距由 style.yaml 执行。 该布局为实现选择。
+  certainty: choice
+- aspect: data
+  evidence: 人为构造的正比值与区间端点；未拟合统计模型、计算 p 值或声明置信覆盖率。 data/contract.yaml 与脚本验证输入约束。
+  certainty: verified
+reviewer: ChatGPT agent：2026-10-10 实际渲染、查看图片与 PDF 栅格化结果，结合代码和数据契约核对

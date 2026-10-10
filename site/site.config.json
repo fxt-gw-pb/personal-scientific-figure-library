@@ -1,0 +1,15 @@
+{
+  "$comment": "Website settings read by `python scripts/figurelib.py site`. Not copied to the published site.",
+  "title": "科研图库",
+  "subtitle": "收藏值得反复使用的科研图：每张都有原图、可执行的样式与代码、数据契约和验证记录。挑一张，复制 ID，交给 agent 用你的新数据作图。",
+  "repository": {
+    "url": "https://github.com/fxt-gw-pb/personal-scientific-figure-library",
+    "branch": "main"
+  },
+  "include_examples": true,
+  "link_repository_files": true,
+  "features": {
+    "recolor": true,
+    "compose": true
+  }
+}

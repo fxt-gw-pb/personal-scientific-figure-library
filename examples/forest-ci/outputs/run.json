@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "entry_id": "forest-ci",
+  "run_id": "ebda455fdef1476681ac5b920c889d17",
+  "created_utc": "2026-10-10T08:54:10+00:00",
+  "success": true,
+  "output_mode": "canonical",
+  "argv": [
+    "python",
+    "code/plot.py",
+    "--data",
+    "data/example.csv",
+    "--style",
+    "style.yaml",
+    "--out",
+    "outputs"
+  ],
+  "argv_note": "Paths are normalized for portability. Execution uses an entry-relative working directory, the current interpreter, and a temporary output directory that is committed only after validation. External inputs are recorded by basename and hash.",
+  "inputs": [
+    {
+      "path": "data/contract.yaml",
+      "role": "contract",
+      "sha256": "4470eaf2f5051584bd77a2c89db67abac7db8791685d8f335057864dd455e978"
+    },
+    {
+      "path": "data/example.csv",
+      "role": "data",
+      "sha256": "a8cc9948e8d0550389fb48469e99dc2cf03d64a7bf2cd1fc1d17641b95637439"
+    },
+    {
+      "path": "data/alternative.csv",
+      "role": "data-support",
+      "sha256": "97184a56edeadaea91c43c191398a6e849015e9f80d7409a96e51323559ac933"
+    },
+    {
+      "path": "code/plot.py",
+      "role": "entrypoint",
+      "sha256": "caaee52c350fbd404342d6373e829e43d0e698ff1a5be6d2dc8bd06436eadef3"
+    },
+    {
+      "path": "reference/source.png",
+      "role": "reference",
+      "sha256": "6765d862078a666ae6b24c3eb03075dbfb9e6fc849d4781c4dd1dd582a0f4a54"
+    },
+    {
+      "path": "code/requirements.txt",
+      "role": "requirements",
+      "sha256": "a4c0aa9064564ec65ea8a3860e3d490695eaa1360f130e46539675dc0bc6c58e"
+    },
+    {
+      "path": "reference/ORIGIN.md",
+      "role": "source-material",
+      "sha256": "5d3115ff691328deee0a87c42fbc72774e3e9b22c61d485156c72583834573b8"
+    },
+    {
+      "path": "style.yaml",
+      "role": "style",
+      "sha256": "9d5a422d83584f47d6ba4d25e872381826a91ec22caf64e8a12fd6aa35b2761a"
+    }
+  ],
+  "input_sha256": "0d33bf774f103872abc931818c19a84aeae832ddbb0fe6644a048f9367f4a3e5",
+  "metadata_basis": {
+    "source": {
+      "kind": "example",
+      "citation": null,
+      "url": null,
+      "doi": null,
+      "figure_label": null,
+      "files": [
+        {
+          "path": "reference/source.png",
+          "sha256": "6765d862078a666ae6b24c3eb03075dbfb9e6fc849d4781c4dd1dd582a0f4a54",
+          "role": "image"
+        },
+        {
+          "path": "reference/ORIGIN.md",
+          "sha256": "5d3115ff691328deee0a87c42fbc72774e3e9b22c61d485156c72583834573b8",
+          "role": "other"
+        }
+      ]
+    },
+    "data": {
+      "kind": "synthetic",
+      "path": "data/example.csv",
+      "contract": "data/contract.yaml",
+      "notes": "人为构造的正比值与区间端点；未拟合统计模型、计算 p 值或声明置信覆盖率。"
+    },
+    "implementation": {
+      "language": "python",
+      "entrypoint": "code/plot.py",
+      "requirements": "code/requirements.txt",
+      "style": "style.yaml"
+    },
+    "reference": "reference/source.png"
+  },
+  "basis_sha256": "50a7832d305ac038969420708ebbbea70bd0bef19420a9edd16dbcd761871005",
+  "recipe_sha256": "5cd2c5553899d50e1adde801614b0029f2fc8dfc608d0bdde21ee76cb605ec6e",
+  "data_sha256": "a8cc9948e8d0550389fb48469e99dc2cf03d64a7bf2cd1fc1d17641b95637439",
+  "outputs": {
+    "figure.pdf": "92727e5c78585d311d207f9baeeaa2add19a736e196608c470d46162478a511e",
+    "figure.png": "6765d862078a666ae6b24c3eb03075dbfb9e6fc849d4781c4dd1dd582a0f4a54",
+    "figure.svg": "d692a7c551f2e63aeae69961c71eb38e6a2cbbf2d13619724089981f435fe748",
+    "thumb.png": "5f2791442546ec281e7143c705fbddcce5a83e513142958d56a352fe4b2d59df"
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "packages": {
+      "jsonschema": "4.26.0",
+      "matplotlib": "3.10.8",
+      "numpy": "2.3.5",
+      "Pillow": "12.3.0",
+      "PyYAML": "6.0.3"
+    }
+  },
+  "declared_seed": null
+}

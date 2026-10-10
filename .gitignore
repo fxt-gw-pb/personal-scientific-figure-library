@@ -1,0 +1,28 @@
+# Local environments and caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Intake before curation; research-specific reuse and scratch work
+inbox/
+workspace/
+.private/
+.figurelib-*/
+*.tmp
+
+# Interrupted render/backup staging directories inside entries (safe to delete)
+.outputs.render-*/
+.outputs.backup-*/
+.*.render-*/
+
+# Generated website output (rebuilt by `figurelib.py site` / GitHub Actions)
+_site/
+
+# Accepted per-figure outputs and catalog/ are intentionally tracked.
+# Large source material should be managed explicitly; see docs/github-and-storage.md.

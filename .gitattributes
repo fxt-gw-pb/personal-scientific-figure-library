@@ -1,0 +1,18 @@
+* text=auto eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+*.svg text eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.pdf binary
+
+# Entry fingerprints refer to exact bytes. Preserve line endings of original
+# materials and already-reviewed recipe inputs/outputs across Git checkouts.
+# -text disables normalization; it does not disable useful text diffs.
+figures/** -text
+examples/** -text

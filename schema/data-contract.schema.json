@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Declared CSV structure; chart code validates mathematical constraints.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "format": {
+      "const": "csv"
+    },
+    "description": {
+      "type": "string"
+    },
+    "columns": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "string",
+              "number",
+              "integer",
+              "boolean",
+              "date"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "required",
+          "description"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "type": "object"
+          }
+        ]
+      }
+    },
+    "example_kind": {
+      "enum": [
+        "synthetic",
+        "original",
+        "digitized",
+        "unknown"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "format",
+    "description",
+    "columns",
+    "constraints",
+    "example_kind"
+  ],
+  "additionalProperties": true
+}

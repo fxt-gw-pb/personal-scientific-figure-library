@@ -1,0 +1,9 @@
+label,group,estimate,lower,upper
+Regular physical activity,Habits,0.74,0.59,0.93
+Consistent sleep schedule,Habits,0.83,0.68,1.02
+Higher dietary quality,Habits,0.88,0.73,1.07
+Longer sedentary time,Habits,1.27,1.06,1.52
+Greater environmental exposure,Context,1.42,1.17,1.73
+Greater neighbourhood access,Context,0.91,0.76,1.09
+Higher contextual stress,Context,1.58,1.26,1.98
+Longer daily travel time,Context,1.14,0.95,1.37

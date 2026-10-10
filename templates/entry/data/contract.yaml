@@ -1,0 +1,14 @@
+schema_version: 1
+format: csv
+description: 占位表头。收到数据后按真实语义改写，不能直接当作已复现图表。
+columns:
+  - name: x
+    type: number
+    required: true
+    description: 待定义
+  - name: y
+    type: number
+    required: true
+    description: 待定义
+constraints: []
+example_kind: unknown

@@ -1,0 +1,38 @@
+schema_version: 1
+format: csv
+description: Complete long-format matrix of signed standardized coefficients and supplied intervals; the selected outcome is repeated in a matched interval panel.
+example_kind: synthetic
+columns:
+  - name: feature
+    type: string
+    required: true
+    description: Nonempty feature label; first appearance determines row order.
+  - name: outcome
+    type: string
+    required: true
+    description: Nonempty outcome label; first appearance determines column order.
+  - name: estimate
+    type: number
+    required: true
+    description: Finite signed coefficient on a common interpretable standardized scale.
+  - name: lower
+    type: number
+    required: true
+    description: Finite lower interval endpoint in the same units as estimate.
+  - name: upper
+    type: number
+    required: true
+    description: Finite upper interval endpoint in the same units as estimate.
+constraints:
+  - Column names must match the five listed columns exactly; their order may vary.
+  - Empty data, blank labels, duplicate feature/outcome pairs, extra fields, and missing fields are rejected.
+  - Every feature must have exactly one row for every outcome; missing cells are not silently imputed.
+  - All numeric values must be finite and lower <= estimate <= upper.
+  - Signed coefficients are not correlations and are not restricted to [-1, 1].
+  - marks.focal_outcome must match a supplied outcome exactly.
+  - The heatmap has a symmetric scale centered at zero; explicit color limits smaller than an estimate are rejected.
+  - The interval panel reads the very same cells as the selected heatmap column.
+  - Sign colors are semantic and remain stable when rows/columns are reordered.
+  - The plot calculates no model, p-value, statistical significance, or confidence coverage.
+  - Real-data coefficients need compatible units and a clear definition of standardization before being compared.
+  - Dense or long labels that exceed the fixed canvas cause an explicit rendering error.
