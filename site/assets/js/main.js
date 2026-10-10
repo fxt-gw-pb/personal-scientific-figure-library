@@ -69,6 +69,29 @@ function notFound(message = "页面不存在") {
     h("div", { class: "stack" }, h("h3", message), h("p", h("a", { href: href("/") }, "回到图库")))));
 }
 
+// Hide the top bar while scrolling down, reveal it when scrolling up or near the top.
+function watchScroll() {
+  const toTop = h("button", { class: "to-top", type: "button", "aria-label": "回到顶部", title: "回到顶部", onClick: () => scrollTo({ top: 0, behavior: "smooth" }) }, icon("arrowUp"));
+  document.body.append(toTop);
+  let lastY = scrollY;
+  let pending = false;
+  addEventListener("scroll", () => {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => {
+      const y = scrollY;
+      const dy = y - lastY;
+      const body = document.body;
+      if (y < 120 || dy < -8) body.classList.remove("nav-hidden");
+      else if (dy > 8 && !document.querySelector(".lightbox")) body.classList.add("nav-hidden");
+      body.classList.toggle("scrolled", y > 4);
+      toTop.classList.toggle("show", y > 700);
+      if (Math.abs(dy) > 8 || y < 120) lastY = y;
+      pending = false;
+    });
+  }, { passive: true });
+}
+
 async function route(ctx, oldURL) {
   const token = ++renderToken;
   const { path } = parseHash();
@@ -96,6 +119,7 @@ async function route(ctx, oldURL) {
     node = notFound(`页面出错：${err.message}`);
   }
   if (token !== renderToken) return;
+  document.body.classList.remove("nav-hidden");
   mount(main, node);
   renderTopbar(ctx);
   const samePage = previousPath === path;
@@ -125,6 +149,7 @@ async function start() {
   };
   for (const f of allFeatures()) f.setup?.(ctx);
   renderChrome(ctx);
+  watchScroll();
   on("tray", () => renderTopbar(ctx));
   addEventListener("hashchange", (e) => route(ctx, e.oldURL));
   addEventListener("keydown", (e) => {

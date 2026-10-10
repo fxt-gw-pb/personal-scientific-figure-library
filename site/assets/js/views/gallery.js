@@ -113,20 +113,31 @@ function render(ctx) {
   const results = h("div");
   const resultLine = h("div", { class: "result-line" });
   const filterHost = h("div", { class: "filters" });
+  const popoverHost = h("div", { class: "filters" });
+  const filterCount = h("span");
+  const stuckSummary = h("span", { class: "stuck-summary" });
   const stats = h("div", { class: "stats" });
 
-  const update = () => {
+  let firstPaint = true;
+  const update = ({ keepScroll = false } = {}) => {
     writeFilters({ ...filters, sort: filters.sort === "status" ? "" : filters.sort });
     const shown = all.filter((e) => matches(e, filters)).sort(SORTS[filters.sort].fn);
     const active = FILTER_KEYS.filter((k) => k !== "sort" && filters[k]).length;
+    mount(filterCount, active ? h("span", { class: "count" }, active) : null);
+    mount(stuckSummary, `${shown.length} / ${all.length} 张`);
     mount(resultLine,
       h("span", `显示 ${shown.length} / ${all.length} 张图`),
       active ? h("button", { class: "linklike", type: "button", onClick: () => { FILTER_KEYS.forEach((k) => k !== "sort" && (filters[k] = "")); search.value = ""; update(); } }, "清除筛选") : null);
     mount(results, shown.length
-      ? h("div", { class: `grid ${view === "list" ? "list" : ""}` }, shown.map((e, i) => card(e, ctx, i)))
+      ? h("div", { class: ["grid", view === "list" && "list", firstPaint && "animate"] }, shown.map((e, i) => card(e, ctx, i)))
       : h("div", { class: "notice" }, "没有符合条件的图。试试换个关键词或清除筛选。"));
     renderFilters();
     renderStats();
+    // When the results are scrolled far down, a new filter jumps back to the first result.
+    if (!firstPaint && !keepScroll && toolbar.classList.contains("is-stuck")) {
+      scrollTo({ top: sentinel.getBoundingClientRect().top + scrollY - parseFloat(getComputedStyle(toolbar).top) + 1 });
+    }
+    firstPaint = false;
   };
 
   const toggle = (key, value) => () => { filters[key] = filters[key] === value ? "" : value; update(); };
@@ -138,7 +149,8 @@ function render(ctx) {
       return n ? h("button", { class: `stat status-${s}`, type: "button", "aria-pressed": String(filters.status === s), title: STATUS[s].hint, onClick: toggle("status", s) }, h("b", n), h("span", STATUS[s].label)) : null;
     }));
 
-  const renderFilters = () => {
+  // Built twice (inline rows + sticky popover) so each copy has live click handlers.
+  const filterRows = () => {
     const rows = [];
     const families = count(all, (e) => e.family);
     if (families.length > 1 || filters.family) rows.push(["类型", families.map(([v, n]) => chip(v, filters.family === v, toggle("family", v), { n }))]);
@@ -147,16 +159,30 @@ function render(ctx) {
     if (all.some((e) => e.kind === "example")) rows.push(["来源", [chip("正式收藏", filters.kind === "collected", toggle("kind", "collected"), { n: collected.length }), chip("工程示例", filters.kind === "example", toggle("kind", "example"), { n: all.length - collected.length })]]);
     const tags = count(all, (e) => e.tags);
     if (tags.length) rows.push(["标签", tags.map(([v, n]) => chip(`#${v}`, filters.tag === v, toggle("tag", v), { n }))]);
-    mount(filterHost, rows.map(([label, chips]) => h("div", { class: "filter-row" }, h("span", { class: "filter-label" }, label), chips)));
+    return rows.map(([label, chips]) => h("div", { class: "filter-row" }, h("span", { class: "filter-label" }, label), chips));
   };
+  const renderFilters = () => { mount(filterHost, filterRows()); mount(popoverHost, filterRows()); };
 
-  const search = h("input", { type: "search", placeholder: "搜索 ID、标题、标签、配色角色…", value: filters.q, "aria-label": "搜索图库", onInput: debounce((e) => { filters.q = e.target.value.trim(); update(); }, 120) });
+  const search = h("input", { type: "search", placeholder: "搜索 ID、标题、标签、配色角色…", value: filters.q, "aria-label": "搜索图库", onInput: debounce((e) => { filters.q = e.target.value.trim(); update(); }, 160) });
   const viewButtons = h("div", { class: "segmented", role: "group", "aria-label": "视图" },
     [["grid", "grid", "网格"], ["list", "list", "列表"]].map(([v, ic, label]) => h("button", { type: "button", title: label, "aria-label": label, "aria-pressed": String(view === v), onClick: (e) => {
       view = v; storage.set("view", v);
       for (const b of e.currentTarget.parentElement.children) b.setAttribute("aria-pressed", String(b === e.currentTarget));
-      update();
+      update({ keepScroll: true });
     } }, icon(ic))));
+
+  const filterToggle = h("button", { class: "btn filter-toggle", type: "button", "aria-expanded": "false", onClick: () => setOpen(!toolbar.classList.contains("filters-open")) }, icon("sliders"), "筛选", filterCount);
+  const setOpen = (open) => { toolbar.classList.toggle("filters-open", open); filterToggle.setAttribute("aria-expanded", String(open)); };
+  const sentinel = h("div", { "aria-hidden": "true", style: { height: "1px", marginTop: "17px", marginBottom: "-1px" } });
+  const toolbar = h("div", { class: "toolbar" },
+    h("div", { class: "toolbar-main" },
+      h("label", { class: "search" }, icon("search"), h("span", { class: "visually-hidden" }, "搜索"), search, h("kbd", "/")),
+      h("select", { class: "select", "aria-label": "排序", onChange: (e) => { filters.sort = e.target.value; update(); } },
+        Object.entries(SORTS).map(([k, s]) => h("option", { value: k, selected: filters.sort === k }, s.label))),
+      viewButtons,
+      filterToggle,
+      stuckSummary),
+    h("div", { class: "filter-popover", role: "dialog", "aria-label": "筛选" }, popoverHost));
 
   const accents = [...new Set(all.flatMap((e) => paletteEntries(e.style?.palette).map(([, v]) => v.toUpperCase()).filter(isAccent)))];
   const ribbon = accents.length ? accents : ["#1F766F", "#B4573F", "#2F6DB0", "#C08A1E"];
@@ -170,18 +196,27 @@ function render(ctx) {
       stats),
     ctx.mode === "local" ? problemsPanel(ctx) : null,
     collected.length === 0 ? emptyCollection(ctx) : null,
-    h("div", { class: "toolbar" },
-      h("div", { class: "toolbar-main" },
-        h("label", { class: "search" }, icon("search"), h("span", { class: "visually-hidden" }, "搜索"), search, h("kbd", "/")),
-        h("select", { class: "select", "aria-label": "排序", onChange: (e) => { filters.sort = e.target.value; update(); } },
-          Object.entries(SORTS).map(([k, s]) => h("option", { value: k, selected: filters.sort === k }, s.label))),
-        viewButtons),
-      filterHost),
+    sentinel,
+    toolbar,
+    filterHost,
     resultLine,
     results);
 
+  // Sticky toolbar: compact once it reaches the top; filters move into a popover.
+  const onScroll = () => {
+    const stuck = sentinel.getBoundingClientRect().top < parseFloat(getComputedStyle(toolbar).top) + 1;
+    toolbar.classList.toggle("is-stuck", stuck);
+    if (!stuck) setOpen(false);
+  };
+  const onOutside = (e) => { if (!toolbar.contains(e.target)) setOpen(false); };
+  addEventListener("scroll", onScroll, { passive: true });
+  document.addEventListener("pointerdown", onOutside);
+  ctx.onLeave(() => { removeEventListener("scroll", onScroll); document.removeEventListener("pointerdown", onOutside); });
+
   update();
+  requestAnimationFrame(onScroll);
   ctx.onKey("/", () => search.focus());
+  ctx.onKey("Escape", () => setOpen(false));
   return page;
 }
 

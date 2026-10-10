@@ -5,7 +5,8 @@ This file describes this repository only. It is not a globally installed skill.
 ## Scope
 
 - Follow the user's current request. When they name a figure ID, inspect only that entry by default. `context ID` is the compact entry point. Do not search or validate the whole collection unless requested or needed to rebuild the catalog.
-- There is no automatic retrieval, model service, preference learning, website deployment, commit or push. Use Git only within the authorization of the current task.
+- There is no automatic retrieval, model service or preference learning. Use Git only within the authorization of the current task. 例外：用户明确要求“把某张图收进图库”（`figure-collect` skill，见 `skills/figure-collect/SKILL.md`）即授权为该条目提交并推送到 `main`；其他任务不推送。
+- 作图请求不要自动使用图库；只有用户点名这个图库或某个 ID 时才按 `prompts/02-reuse-by-id.md` 复用。
 - For collecting/reproducing a figure, follow `prompts/01-collect-and-reproduce.md` and read `docs/reproduction-guide.md` when needed. For reuse, use `prompts/02-reuse-by-id.md`. Do not require the user to answer every metadata field.
 
 ## A complete entry

@@ -10,7 +10,8 @@
 
 | 你想做的事 | 入口 |
 |---|---|
-| 给 agent 一张图，让它收录并尽量还原 | [收录与复现提示词](prompts/01-collect-and-reproduce.md) |
+| 告诉 agent“这张图收进图库” | 已安装的 `figure-collect` skill 自动走完收录→复现→验证→推送；见 [skill 说明](skills/figure-collect/SKILL.md) |
+| 手动让 agent 收录并尽量还原 | [收录与复现提示词](prompts/01-collect-and-reproduce.md) |
 | 指定某张图，用自己的新数据作图 | [按 ID 复用提示词](prompts/02-reuse-by-id.md) |
 | 调整已经入库的配色、布局或代码 | [条目修改提示词](prompts/03-refine-entry.md) |
 | 理解本次为什么这样设计 | [仓库架构与取舍](docs/architecture.md) |
@@ -148,6 +149,12 @@ python -m unittest discover -s tests -v
 独立的 `data.kind` 说明数据来自哪里：`original`、`digitized`、`synthetic` 或 `unknown`。因此 `reproduced + synthetic` 的正确理解是“用演示数据完成视觉结构重建”，不能写成“恢复了原论文结果”。
 
 验收绑定当前代码、样式、数据与输出的文件摘要，也绑定原图/来源信息、数据性质与说明、执行入口和依赖清单。修改这些内容后旧验收会失效；重新渲染也需要重新检查和绑定。标题、收藏理由和公开目录开关等展示信息可以独立更新。对照图帮助你和 agent 找出差异，工具不会输出一个虚假的“还原率 99%”。
+
+## 收图 skill（只管收录，不管作图）
+
+`skills/figure-collect/` 是一个只负责收录的 agent skill，已安装到 Claude Code（`~/.claude/skills/figure-collect`）和 Codex（`~/.codex/skills/figure-collect`）。对任一 agent 说“这张图做得好，收进图库”即可：它定位或克隆本仓库、保存原件、复现为配方、换数据验证、填写验收、更新目录，然后提交并推送到 GitHub，网页随之自动更新。
+
+它不会在你作图时自动介入。要用图库作图，请明确说“用我的 GitHub 科研图库里的 `ID` 画……”，agent 再按 [按 ID 复用提示词](prompts/02-reuse-by-id.md) 手动读取该条目。修改 `SKILL.md` 后运行 `scripts/install-skill.sh` 重新安装。
 
 ## GitHub 与图库网页
 
